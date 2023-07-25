@@ -26,4 +26,8 @@ abstract class FlutterProxyPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+  
+  Future<String?> getProxy() {
+    throw UnimplementedError('getProxy() has not been implemented');
+  }
 }

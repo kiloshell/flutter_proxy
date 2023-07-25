@@ -11,7 +11,13 @@ class MethodChannelFlutterProxy extends FlutterProxyPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version = await methodChannel.invokeMethod<String>(
+        'getPlatformVersion');
     return version;
+  }
+
+  @override
+  Future<String?> getProxy() async {
+    return await methodChannel.invokeMethod<String>('getProxy');
   }
 }

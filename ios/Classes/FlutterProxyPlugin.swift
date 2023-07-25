@@ -12,8 +12,29 @@ public class FlutterProxyPlugin: NSObject, FlutterPlugin {
     switch call.method {
     case "getPlatformVersion":
       result("iOS " + UIDevice.current.systemVersion)
+    case "getProxy":
+      result(getProxy())
     default:
       result(FlutterMethodNotImplemented)
     }
+  }
+  
+  func getProxy() -> String? {
+    var proxyDict: NSDictionary?
+    var host: String?
+    var port: Int?
+    // 获取系统代理设置
+    proxyDict = CFNetworkCopySystemProxySettings()?.takeRetainedValue() as? NSDictionary
+    // 提取HTTP代理信息
+    if let proxies = proxyDict?[kCFNetworkProxiesHTTPProxy] as? String {
+        host = proxies
+    }
+    if let portNumber = proxyDict?[kCFNetworkProxiesHTTPPort] as? Int {
+        port = portNumber
+    }
+    if host != nil && port != nil {
+      return "\(host!):\(port!)"
+    }
+    return nil
   }
 }

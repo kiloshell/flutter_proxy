@@ -5,4 +5,8 @@ class FlutterProxy {
   Future<String?> getPlatformVersion() {
     return FlutterProxyPlatform.instance.getPlatformVersion();
   }
+
+  Future<String?> getProxy(){
+    return FlutterProxyPlatform.instance.getProxy();
+  }
 }
